@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  go:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - SQL_HOST=localhost
+      - SQL_PORT=3306
+      - SQL_USER=myuser
+      - SQL_PASSWORD=mypassword
+      - SQL_NAME=mydatabase
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+  
